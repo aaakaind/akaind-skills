@@ -1,0 +1,22 @@
+{
+  "name": "reliability",
+  "version": "0.1.0",
+  "description": "Ship real systems and prove they work. An operating standard for agentic work, end-to-end live-service verification, a go-live checklist, autonomy auditing, an unaudited-SOC 2 operating standard, and a PMBOK-7 project charter.",
+  "author": {
+    "name": "AKA IND Technologies Inc. (AI² Lab)",
+    "url": "https://akaind.ca"
+  },
+  "homepage": "https://akaind.ca",
+  "license": "MIT",
+  "keywords": [
+    "claude-skills",
+    "agent-skills",
+    "reliability",
+    "verification",
+    "go-live",
+    "soc2",
+    "pmbok",
+    "qa"
+  ],
+  "skills": ["./skills/"]
+}

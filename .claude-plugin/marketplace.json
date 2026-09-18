@@ -1,0 +1,49 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "akaind",
+  "description": "AKA IND Technologies public skill packs for Claude — vendor-neutral, MIT-licensed, distilled from running a real multi-venture operation. Released through AI² Lab.",
+  "owner": {
+    "name": "AKA IND Technologies Inc.",
+    "url": "https://akaind.ca"
+  },
+  "metadata": {
+    "description": "Add this marketplace once; install whichever packs you want. Reliability & Shipping is out now, with more packs to follow.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "reliability",
+      "source": "./plugins/reliability",
+      "description": "Ship real systems and prove they work. Six skills: an operating standard for agentic work, end-to-end live-service verification, a go-live checklist, autonomy auditing, an unaudited-SOC 2 operating standard, and a PMBOK-7 project charter.",
+      "version": "0.1.0",
+      "author": {
+        "name": "AKA IND Technologies Inc. (AI² Lab)",
+        "url": "https://akaind.ca"
+      },
+      "homepage": "https://akaind.ca",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": [
+        "claude-skills",
+        "agent-skills",
+        "reliability",
+        "verification",
+        "go-live",
+        "launch",
+        "soc2",
+        "pmbok",
+        "project-management",
+        "devops",
+        "qa"
+      ],
+      "skills": [
+        "./skills/operating-standard",
+        "./skills/verify-live-service",
+        "./skills/go-live-checklist",
+        "./skills/audit-autonomy",
+        "./skills/soc2-standard",
+        "./skills/project-charter"
+      ]
+    }
+  ]
+}
