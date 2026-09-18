@@ -50,11 +50,26 @@ Finding an autonomous actor is not the finding. **The finding is what it consult
 
 The auto-merge case was not dangerous because it merged. It was dangerous because its only test was a semver string from dependency metadata â€” under which a "minor" bump of an auth library merges unattended, which is precisely how a production site had broken previously.
 
-›ÜˆXXÚXİÜ‹\ÚÎ‚‚ŒKˆÚ]Ù\È]ÚXÚÈ™Y›Ü™HXİ[™ÏÂŒ‹ˆÛİ[]ÚXÚÈ\ÜÈ›ÜˆÛÛY][™È]Úİ[]™H™Y[ˆİÜYÈÛÛœİXİHÜXÚYšXÈØ\ÙK‚ŒËˆÚ]Ø\È\Üİ[YYÈ™HH˜XÚÜİÜ[™Ûİ[]XİX[HØ]ÚHØ\ÙH[ˆ
-ŠOÈœ˜[˜Ú›İXİ[ÛˆØ]Ú\ÈHˆ]˜Z[ÈHZ[È]Ù\È›İØ]ÚHˆ]\ÈÜ™Y[ˆ[™Ü›Û™Ë‚ˆ\ÈHXİ[Ûˆ™]™\œÚX›K[™\ÈH™]™\œØ[]™\ˆ™Y[ˆ\™›Ü›YYÂ‚HØ]H]Û›HÙY\ÈY]Y]HØ[››İYÙH[[ˆHØ]H]Û›HÙY\È^]ÛÙ\ÈØ[››İYÙHXYÛš]YK‚‚ˆÈÈÜš][™ÈÛÙH]XİÂ‚•Ú[ˆY[™È[][™È]Ûİ[Y\™ÙK\ŞK[]KÙ[™ÜˆÜ[™‚‚‹H
-Š‘Y˜][È›ÜÜÚ[™Ë›İXİ[™ËŠŠˆÜ[ˆHÈÈ›İY\™ÙH]ˆ˜YHY\ÜØYÙNÈÈ›İÙ[™]ˆHÛÜİÙˆH[X[ˆÛXÚÚ[™È\È˜\ˆ™[İÈHÛÜİÙˆHÛ\ÜÈÙˆZ\İZÙH\È™]™[Ë‚‹H
-Š•ZÙHH˜\œ›İÙ\İ\›Z\ÜÚ[Ûˆ]ÛÜšÜËŠŠˆ™XY[›\ÜÈÜš]X\ÈÙ[Z[™[H™\]Z\™Y[™ØÛÜYÈÚ]]İXÚ\Ë‚‹H
-Š“XZÙH]\ØÛİ™\˜X›KŠŠˆHÜ˜[Ùˆ]]Û›Û^Hš[™X›HÛ›HH™XY[™ÈÛİ\˜ÙH\ÈÛ™H›Ø›ÙHÚ[™[Y[X™\ˆXZÚ[™Ëˆ˜[YH][ˆHˆ\ØÜš\[Ûˆ^XÚ]Nˆ
-\ÈØ[ˆY\™ÙHÈ\ŞHÈ[]HÈÙ[™ÈÜ[™Š‚‹H
-Š“XZÙHHØ]HYÚX›KŠŠˆYˆ]XİÈÛˆHÛÛ™][Û‹HÛÛ™][ÛˆÚİ[™H[œÜXİX›H[™\İX›H[ˆ\ÛÛ][Û‹›İ\šYY[ˆHÛÛ™][Û˜[‚‹H
-Š‘˜Z[ÛÜÙYŠŠˆYˆHØ]HØ[››İ]˜[X]KÈ›İXİ‚‚ˆÈÈØY[˜ÙB‚”İÙY\ÛˆHØÚY[K[™Y\ˆ[H[™^XİYÚ[™ÙH\X\œËˆ™XÛÜ™H™\İ[Ú]H]H8 %[˜ÛY[™È››İ[™È\›YY‹ÚXÚ\ÈÛ›HYX[š[™Ù[Yˆ]Ø\ÈYX\İ\™Y˜]\ˆ[ˆ\Üİ[YY‚‚
+For each actor, ask:
+
+1. What does it check before acting?
+2. Could that check pass for something that should have been stopped? Construct the specific case.
+3. What was assumed to be the backstop, and would it actually catch the case in (2)? Branch protection catches a PR that fails a build; it does not catch a PR that is green and wrong.
+4. Is the action reversible, and has the reversal ever been performed?
+
+A gate that only sees metadata cannot judge intent. A gate that only sees exit codes cannot judge magnitude.
+
+## Writing code that acts
+
+When adding anything that could merge, deploy, delete, send, or spend:
+
+- **Default to proposing, not acting.** Open the PR; do not merge it. Draft the message; do not send it. The cost of a human clicking is far below the cost of the class of mistake this prevents.
+- **Take the narrowest permission that works.** `read` unless `write` is genuinely required, and scoped to what it touches.
+- **Make it discoverable.** A grant of autonomy findable only by reading source is one nobody will remember making. Name it in the PR description explicitly: *this can merge / deploy / delete / send / spend.*
+- **Make the gate legible.** If it acts on a condition, the condition should be inspectable and testable in isolation, not buried in a conditional.
+- **Fail closed.** If the gate cannot evaluate, do not act.
+
+## Cadence
+
+Sweep on a schedule, and after any unexpected change appears. Record the result with a date â€” including "nothing armed", which is only meaningful if it was measured rather than assumed.
+
