@@ -15,7 +15,7 @@ This is a **marketplace that holds multiple packs**. Add it once, then install w
 
 | Pack | Status | Skills |
 |---|---|---|
-| **[Reliability & Shipping](./plugins/reliability)** | ✅ Available | `operating-standard`, `verify-live-service`, `go-live-checklist`, `audit-autonomy`, `soc2-standard`, `project-charter` |
+| **[Reliability & Shipping](./plugins/reliability/README.md)** | ✅ Available | `operating-standard`, `verify-live-service`, `go-live-checklist`, `audit-autonomy`, `soc2-standard`, `project-charter` |
 | **AI Operator Fleet** | Planned | A multi-agent operator system: lane operators (HQ, tech, finance, legal, sales, media, AI-engineering, archivist), the Council / Inspectorate / Watchtower / Growth-Engine systems, and Vanessa, a chief-of-staff control layer. |
 | **Content & Growth** | Planned | Scroll-stopping social content, multi-channel program orchestration, media and sales operators. |
 | **Canadian Finance & Tax** | Planned | CCPC tax strategy, T2 corporate-return prep, and finance-operations discipline. |
